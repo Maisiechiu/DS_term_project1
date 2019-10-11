@@ -84,6 +84,340 @@ int detype (char* ch) {
   if(ch[0]=='E') currentstate=0;
   return 0;
 }
+void cleanrow(metrix* met,int row){
+    for(int i=row;i>0;i--){
+        for(int n=0;n<=(met->col)+1;n++)
+       (met->index)[i][n]=(met->index)[i-1][n];
+    }
+}
+
+void drawblock(metrix* met, int row,int x,int type){
+    int clean,i,j,temp;
+    if(row<=1||x>=met->col||x<0){
+        currentstate=0;
+        return;
+    }
+    switch(type){
+           case 1:
+       if(x+2>=met->col){
+        currentstate= 0;
+        return ;
+       }
+
+       for(j=x;j<x+3&&j<=met->col;j++){
+         (met->index)[row-1][j]=1;
+       }
+       met->index[row][x+1]=1;
+       for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+
+
+     case 2:
+       if(x+1>=met->col) currentstate=0;
+       met->index[row-1][x]=1;
+       for(i=row;i>row-3&&i>=1;i--){
+         met->index[i][x+1]=1;
+       }
+     for(i=row;i>row-3;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x+1]==1) currentstate=0;
+     break;
+
+       case 3 :
+      if(x+2>=met->col)currentstate=0;
+        met->index[row-1][x+1]=1;
+      for(j=x;j<=x+2;j++) met->index[row][j]=1;
+      for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x+1]==1) currentstate=0;
+     break;
+
+    case 4:
+       if(x+1>=met->col) currentstate=0;
+       met->index[row-1][x+1]=1;
+       for(i=row;i>row-3&&i>=1;i--){
+         met->index[i][x]=1;
+       }
+     for(i=row;i>row-3;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+
+     case 5:
+      if(x+1>=(met->col)){
+        currentstate=0;
+        return ;
+      }
+      for(i=row;i>row-3&&i>=1;i--) (met->index)[i][x]=1;
+      met->index[row][x+1]=1;
+      clean=0;
+           for(int n=0;n<met->col;n++){
+            if(met->index[row][n]==1) clean++;
+           }
+           if(clean==met->col)cleanrow(met,i);
+      if(met->index[1][x]==1) currentstate=0;
+     break;
+
+      case 6:
+       if(x+2>=met->col){
+        currentstate= 0;
+        return ;
+       }
+
+       for(j=x;j<x+3&&j<=met->col;j++){
+         (met->index)[row-1][j]=1;
+       }
+       met->index[row][x]=1;
+       for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+
+     case 7:
+       if(x+1>=met->col) currentstate=0;
+       met->index[row-2][x]=1;
+       for(i=row;i>row-3&&i>=1;i--){
+         met->index[i][x+1]=1;
+       }
+     for(i=row;i>row-3;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+
+     case 8:
+        if(x+2>=met->col)currentstate=0;
+        met->index[row-1][x+2]=1;
+        for(j=x;j<=x+2;j++) met->index[row][j]=1;
+      for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x+2]==1) currentstate=0;
+     break;
+
+     case 9:
+        if(x+1>=(met->col)){
+        currentstate=0;
+        return ;
+      }
+      for(i=row;i>row-3&&i>=1;i--) (met->index)[i][x+1]=1;
+      met->index[row][x]=1;
+      clean=0;
+           for(int n=0;n<met->col;n++){
+            if(met->index[row][n]==1) clean++;
+           }
+           if(clean==met->col)cleanrow(met,i);
+      if(met->index[1][x+1]==1) currentstate=0;
+     break;
+
+     case 10 :
+      if(x+2>=met->col)currentstate=0;
+        met->index[row-1][x]=1;
+      for(j=x;j<=x+2;j++) met->index[row][j]=1;
+      for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+
+    case 11:
+       if(x+1>=met->col) currentstate=0;
+       met->index[row-2][x+1]=1;
+       for(i=row;i>row-3&&i>=1;i--){
+         met->index[i][x]=1;
+       }
+     for(i=row;i>row-3;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+
+      case 12:
+       if(x+3>met->col){
+        currentstate= 0;
+        return ;
+       }
+
+       for(j=x;j<x+3&&j<=met->col;j++){
+         (met->index)[row-1][j]=1;
+       }
+       met->index[row][x+2]=1;
+       for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x+2]==1) currentstate=0;
+     break;
+
+     case 13:
+       if(x+2>=met->col){
+        currentstate= 0;
+        return ;
+       }
+
+       for(j=x;j<x+2&&j<=met->col;j++)(met->index)[row][j]=1;
+       for(j=x+1;j<x+3&&j<=met->col;j++)(met->index)[row-1][j]=1;
+       for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x+1]==1) currentstate=0;
+     break;
+
+    case 14:
+       if(x+1>=met->col) currentstate=0;
+       for(i=row;i>row-2&&i>=1;i--)met->index[i][x+1]=1;
+       for(i=row-1;i>row-3&&i>=1;i--)met->index[i][x]=1;
+     for(i=row;i>row-3;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+
+
+     case 15:
+       if(x+2>=met->col){
+        currentstate= 0;
+        return ;
+       }
+
+       for(j=x;j<x+2&&j<=met->col;j++)(met->index)[row-1][j]=1;
+       for(j=x+1;j<x+3&&j<=met->col;j++)(met->index)[row][j]=1;
+       for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x+1]==1) currentstate=0;
+     break;
+
+     case 16:
+       if(x+1>=met->col) currentstate=0;
+       for(i=row;i>row-2&&i>=1;i--)met->index[i][x]=1;
+       for(i=row-1;i>row-3&&i>=1;i--)met->index[i][x+1]=1;
+     for(i=row;i>row-3;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+
+
+    case 17:
+        for(i=row;i>row-4&&i>=1;i--){
+            (met->index)[i][x]=1;
+            temp=i;
+        }
+
+        for(i=temp;i<=row;i++){
+           clean=0;
+           for(int n=0;n<met->col;n++){
+            if(met->index[i][n]==1) clean++;
+           }
+           if(clean==met->col){
+                cleanrow(met,i);
+           }
+        }
+     if(met->index[1][x]==1){
+            currentstate=0;
+            return;
+     }
+     break;
+
+     case 18:
+       if(x+4>met->col){
+        currentstate= 0;
+        return ;
+       }
+
+       for(j=x;j<x+4&&j<=met->col;j++){
+         (met->index)[row][j]=1;
+       }
+         for(int n=0;n<met->col;n++){
+           if(met->index[row][n]==1) clean++;
+         }
+           if(clean==met->col) cleanrow(met,row);
+     break;
+     case 19 :
+       if(x+2>met->col){
+        currentstate= 0;
+        return ;
+       }
+       for(i=row;i>row-2&&i>=1;i--){
+         for(j=x;j<x+2&&j<=met->col;j++){
+          (met->index)[i][j]=1;
+         }
+       }
+     for(i=row;i>row-2;i--){
+       clean=0;
+       for(j=0;j<met->col;j++){
+        if(met->index[i][j]==1) clean++;
+       }
+        if(clean==met->col)cleanrow(met,i);
+     }
+     if(met->index[1][x]==1) currentstate=0;
+     break;
+    }
+}
+
 void findindex(metrix* met,int type,int x){
    int i,n,find1,find2;
    int find=0;
