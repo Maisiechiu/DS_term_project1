@@ -24,6 +24,7 @@ void showmet(metrix* met){
        }
        file2<<endl;
    }
+   file2<<endl;
 }
 
 void newmet(metrix* met,int row, int col){
@@ -602,7 +603,7 @@ void findindex(metrix* met,int type,int x){
       }
      if (find2==0&&find1==0) drawblock(met,(met->row)+1,x,type);
        else if(n+2>i) drawblock(met,i-1,x,type);
-         else drawblock(met,n-1,x,type);
+         else drawblock(met,n+1,x,type);
     break;
 
    case 12:
@@ -744,10 +745,12 @@ void drawmet(metrix* met){
     file>>ch;
     file>>place;
     type=detype(ch);
+     file2<<ch<<" "<<place<<endl;
     if(type==0){
     file.close();
      return;
     }
+    showmet(met);
     findindex(met,type,place-1);
 }
 
