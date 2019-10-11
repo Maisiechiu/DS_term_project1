@@ -15,6 +15,16 @@ int currentstate=1;
 int type;
 ifstream file("Tetris.data");
 ofstream file2("Tetris.output");
+void showmet(metrix* met){
+  int row=met->row;
+  int col=met->col;
+   for(int i=2;i<=row+1;i++){
+       for(int n=0;n<col;n++){
+           file2<<(met->index)[i][n];
+       }
+       file2<<endl;
+   }
+}
 
 void newmet(metrix* met,int row, int col){
     int** head = new int*[row+2];
@@ -41,5 +51,6 @@ if(!file) {
   }
 
  newmet(met,met->row,met->col);
+ showmet(met);
  return 0;
 }
