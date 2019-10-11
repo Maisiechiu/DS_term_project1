@@ -84,7 +84,328 @@ int detype (char* ch) {
   if(ch[0]=='E') currentstate=0;
   return 0;
 }
+void findindex(metrix* met,int type,int x){
+   int i,n,find1,find2;
+   int find=0;
+   switch(type){
+   case  1 :
+      for(i=2;i<=(met->row)+1&&find!=1;i++){
+         if((met->index)[i][x+1]==1){
+           find=2;
+           break;
+          }
+        else{
+          if(met->index[i][x]==1||met->index[i][x+2]==1){
+            find=1;
+            break;
+          }
+         }
+      }
+        if(find==2)drawblock(met,i-1,x,type);
+         else if(find==1)drawblock(met,i,x,type);
+            else drawblock(met,i-1,x,type);
+      break;
 
+    case 2:
+      find1=0;
+      find2=0;
+      for(i=2;i<=(met->row)+1&&find1!=1;i++){
+          if((met->index)[i][x+1]==1){
+               find1=1;
+               break;
+          }
+      }
+       for (n=2;n<=(met->row)+1&&find2!=1;n++){
+          if((met->index)[n][x]==1){
+               find2=1;
+                break;
+          }
+      }
+     if (find2==0&&find1==0) drawblock(met,(met->row)+1,x,type);
+       else if(n+1>i) drawblock(met,i-1,x,type);
+         else drawblock(met,n,x,type);
+    break;
+
+   case 3 :
+     for(i=2;i<=(met->row)+1&&find!=1;i++){
+         for(int n=x;n<x+3;n++){
+          if((met->index)[i][n]){
+            find=1;
+            break;
+          }
+         }
+      }
+        if(find==1)drawblock(met,i-2,x,type);
+         else drawblock(met,i-1,x,type);
+     break;
+
+    case 4 :
+      find1=0;
+      find2=0;
+      for(i=2;i<=(met->row)+1&&find1!=1;i++){
+          if((met->index)[i][x]==1){
+               find1=1;
+               break;
+          }
+      }
+       for (n=2;n<=(met->row)+1&&find2!=1;n++){
+          if((met->index)[n][x+1]==1){
+               find2=1;
+                break;
+          }
+      }
+     if (find2==0&&find1==0) drawblock(met,(met->row)+1,x,type);
+       else if(n+1>i) drawblock(met,i-1,x,type);
+         else drawblock(met,n,x,type);
+    break;
+
+
+   case  5:
+      for(i=2;i<=(met->row)+1&&find!=1;i++){
+        for(int n=x;n<x+2;n++){
+            if(met->index[i][n]==1){
+                find=1;
+                break;
+            }
+        }
+      }
+     if(find==1)drawblock(met,i-2,x,type);
+      else drawblock(met,i-1,x,type);
+      break;
+   case 6:
+      for(i=2;i<=(met->row)+1&&find!=1;i++){
+         if((met->index)[i][x]==1){
+           find=2;
+           break;
+          }
+        else{
+         for(int n=x;n<x+3;n++){
+          if(met->index[i][n]){
+            find=1;
+            break;
+          }
+         }
+        }
+      }
+        if(find==2)drawblock(met,i-1,x,type);
+         else if(find==1)drawblock(met,i-1,x,type);
+            else drawblock(met,i-1,x,type);
+      break;
+
+   case 7:
+      find1=0;
+      find2=0;
+      for(i=2;i<=(met->row)+1&&find1!=1;i++){
+          if((met->index)[i][x+1]==1){
+               find1=1;
+               break;
+          }
+      }
+       for (n=2;n<=(met->row)+1&&find2!=1;n++){
+          if((met->index)[n][x]==1){
+               find2=1;
+                break;
+          }
+      }
+     if (find2==0&&find1==0) drawblock(met,(met->row)+1,x,type);
+       else if(n+2>i) drawblock(met,i-1,x,type);
+         else drawblock(met,n+1,x,type);
+    break;
+
+   case 8:
+     for(i=2;i<=(met->row)+1&&find!=1;i++){
+         for(int n=x;n<x+3;n++){
+          if((met->index)[i][n]){
+            find=1;
+            break;
+          }
+         }
+      }
+        if(find==1)drawblock(met,i-2,x,type);
+         else drawblock(met,i-1,x,type);
+     break;
+
+   case 9 :
+      for(i=2;i<=(met->row)+1&&find!=1;i++){
+        for(int n=x;n<x+2;n++){
+            if(met->index[i][n]==1){
+                find=1;
+                break;
+            }
+        }
+      }
+     if(find==1)drawblock(met,i-2,x,type);
+      else drawblock(met,i-1,x,type);
+      break;
+
+   case 10 :
+     for(i=2;i<=(met->row)+1&&find!=1;i++){
+         for(int n=x;n<x+3;n++){
+          if((met->index)[i][n]){
+            find=1;
+            break;
+          }
+         }
+      }
+        if(find==1)drawblock(met,i-2,x,type);
+         else drawblock(met,i-1,x,type);
+     break;
+
+   case 11 :
+      find1=0;
+      find2=0;
+      for(i=2;i<=(met->row)+1&&find1!=1;i++){
+          if((met->index)[i][x]==1){
+               find1=1;
+               break;
+          }
+      }
+       for (n=2;n<=(met->row)+1&&find2!=1;n++){
+          if((met->index)[n][x+1]==1){
+               find2=1;
+                break;
+          }
+      }
+     if (find2==0&&find1==0) drawblock(met,(met->row)+1,x,type);
+       else if(n+2>i) drawblock(met,i-1,x,type);
+         else drawblock(met,n-1,x,type);
+    break;
+
+   case 12:
+      for(i=2;i<=(met->row)+1&&find!=1;i++){
+         if((met->index)[i][x+2]==1){
+           find=2;
+           break;
+          }
+        else{
+          for(int n=x+1;n<x+3;n++){
+          if(met->index[i][n])
+            find=1;
+            break;
+          }
+         }
+      }
+        if(find==2)drawblock(met,i-1,x,type);
+         else if(find==1)drawblock(met,i-1,x,type);
+            else drawblock(met,i-1,x,type);
+      break;
+
+   case 13:
+      for(i=2;i<=(met->row)+1&&find!=1;i++){
+         if((met->index)[i][x]==1||(met->index)[i][x+1]==1){
+           find=2;
+           break;
+          }
+        else{
+          if(met->index[i][x+2]){
+            find=1;
+            break;
+          }
+         }
+      }
+        if(find==2)drawblock(met,i-1,x,type);
+         else if(find==1)drawblock(met,i,x,type);
+            else drawblock(met,i-1,x,type);
+      break;
+
+    case 14:
+      find1=0;
+      find2=0;
+      for(i=2;i<=(met->row)+1&&find1!=1;i++){
+          if((met->index)[i][x+1]==1){
+               find1=1;
+               break;
+          }
+      }
+       for (n=2;n<=(met->row)+1&&find2!=1;n++){
+          if((met->index)[n][x]==1){
+               find2=1;
+                break;
+          }
+      }
+     if (find2==0&&find1==0) drawblock(met,(met->row)+1,x,type);
+       else if(n+1>i) drawblock(met,i-1,x,type);
+         else drawblock(met,n,x,type);
+    break;
+
+
+    case 15:
+      find1=0;
+      find2=0;
+      for(i=2;i<=(met->row)+1&&find1!=1;i++){
+          if((met->index)[i][x+1]==1||(met->index)[i][x+2]==1){
+               find1=1;
+               break;
+          }
+      }
+       for (n=2;n<=(met->row)+1&&find2!=1;n++){
+          if((met->index)[n][x]==1){
+               find2=1;
+                break;
+          }
+      }
+     if (find2==0&&find1==0) drawblock(met,(met->row)+1,x,type);
+       else if(n+1>i) drawblock(met,i-1,x,type);
+         else drawblock(met,n,x,type);
+    break;
+  case 16 :
+      find1=0;
+      find2=0;
+      for(i=2;i<=(met->row)+1&&find1!=1;i++){
+          if((met->index)[i][x]==1){
+               find1=1;
+               break;
+          }
+      }
+       for (n=2;n<=(met->row)+1&&find2!=1;n++){
+          if((met->index)[n][x+1]==1){
+               find2=1;
+                break;
+          }
+      }
+     if (find2==0&&find1==0) drawblock(met,(met->row)+1,x,type);
+       else if(n+1>i) drawblock(met,i-1,x,type);
+         else drawblock(met,n,x,type);
+    break;
+
+   case 17:
+       for(i=2;i<=(met->row)+1&&find!=1;i++){
+         if((met->index)[i][x]==1){
+             find=1;
+             break;
+         }
+       }
+       if(find==1)drawblock(met,i-1,x,type);
+       else drawblock(met,i-1,x,type);
+   break;
+
+   case 18:
+      for(i=2;i<=(met->row)+1&&find!=1;i++){
+         for(int n=x;n<x+4;n++){
+          if((met->index)[i][n]){
+            find=1;
+            break;
+          }
+         }
+      }
+        if(find==1)drawblock(met,i-2,x,type);
+         else drawblock(met,i-1,x,type);
+     break;
+
+   case 19:
+      for(i=2;i<=(met->row)+1&&find!=1;i++){
+        for(int n=x;n<x+2;n++){
+            if(met->index[i][n]){
+                find=1;
+                break;
+            }
+        }
+      }
+     if(find==1)drawblock(met,i-2,x,type);
+      else drawblock(met,i-1,x,type);
+      break;
+  }
+}
 void drawmet(metrix* met){
     file>>ch;
     file>>place;
